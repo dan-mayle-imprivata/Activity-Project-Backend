@@ -16,8 +16,12 @@ ActiveRecord::Schema.define(version: 2020_03_23_171454) do
     t.string "name"
     t.string "duration"
     t.string "description"
+    t.integer "user_id"
+    t.integer "location_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["location_id"], name: "index_activities_on_location_id"
+    t.index ["user_id"], name: "index_activities_on_user_id"
   end
 
   create_table "locations", force: :cascade do |t|
@@ -34,4 +38,6 @@ ActiveRecord::Schema.define(version: 2020_03_23_171454) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "activities", "locations"
+  add_foreign_key "activities", "users"
 end
