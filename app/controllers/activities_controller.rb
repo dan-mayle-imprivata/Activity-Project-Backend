@@ -8,4 +8,21 @@ class ActivitiesController < ApplicationController
         activity = Activity.find_by(id: params[:id])
         render json: ActivitySerializer.new(activity)
     end
+
+    def new
+        activity = Activity.new
+    end
+
+    def create
+        activity = Activity.create(activity_params)
+        render json: ActivitySerializer.new(activity)
+    end
+
+    private
+
+
+
+    def activity_params
+        params.require(:activity).permit(:name, :duration, :description, :user_id, :location_id)
+    end
 end
