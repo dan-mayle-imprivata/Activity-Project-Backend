@@ -18,6 +18,14 @@ class ActivitiesController < ApplicationController
         render json: ActivitySerializer.new(activity)
     end
 
+    def destroy
+        activity = Activity.find_by(id: params[:id])
+        unless activity.nil?
+            activity.destroy
+            render json: activity
+        end
+    end
+
     private
 
 
